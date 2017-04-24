@@ -20,8 +20,6 @@ def IPv6_validation(ipv6_to_convert):
 					byte = '0' + byte[0:]
 				ipv6_to_convert[index] = byte
 			index += 1
-		print(ipv6_to_convert)
-
 		return ipv6_to_convert
 
 	# 2001:DB8:0:0:130F:140B:11:22 ok

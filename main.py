@@ -1,7 +1,8 @@
 #IPv6 subnets finder
 from IPv6_divider import IPv6_divider
-from hexadecimal_converter import *
+from binary_converter import *
 from IPv6_validation import *
+from subnet_calculator import *
 
 if __name__ == '__main__': 
 
@@ -14,7 +15,8 @@ if __name__ == '__main__':
 	else:
 		ipv6_to_convert = divider_result
 	
-	Hex_converter(IPv6_validation(ipv6_to_convert))
+	Calculator(Bin_converter(IPv6_validation(ipv6_to_convert)), range_of_subnets)
+
 
 	#ipv6_to_convert = IPv6_validation(ipv6_to_convert)
 	#2001:db8:1000/42
