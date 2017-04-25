@@ -39,7 +39,7 @@ def Calculator(net, initial_range):
 		hex_position_counter += 1
 	#end while	
 
-	bit_counter = 0 
+	bit_counter = 1 
 	list_values = []
 	for hex_group in net:
 		for value in hex_group:
@@ -51,8 +51,9 @@ def Calculator(net, initial_range):
 				elif(bit_counter == final_bit):
 					final_hex_group = len(hex_group)
 				
-				if(bit_counter > initial_bit and bit_counter <= final_bit):
-					print(initial_bit)
+				if(bit_counter >= initial_bit and bit_counter <= final_bit):
+					print(bit_counter)
+					print(hex_group)
 					print(index)
 					list_values.append(index)
 					print(list_values)
