@@ -7,7 +7,7 @@ def Calculator(net, initial_range):
 			print('Please, enter a valid net range, between 1 and 128.')
 
 	#This counter is one because make more sense start from one, since IP number start from there 
-	bit_counter, final_bit, initial_bit, group, position, bit_group_counter = 0, 0, 0, 0, 0, 0
+	bit_counter, final_bit, initial_bit, hex_position, position, hex_position_counter = 0, 0, 0, 0, 0, 0
 
 	#converter end to begin
 	if(initial_range > range_to_convert):
@@ -15,7 +15,7 @@ def Calculator(net, initial_range):
 		range_to_convert = initial_range
 		initial_range = aux
 	
-	while(bit_group_counter <= 32):	
+	while(hex_position_counter <= 32):	
 		position_counter = 0
 		
 		while(position_counter < 4):
@@ -29,20 +29,40 @@ def Calculator(net, initial_range):
 				else:
 					final_bit = bit_counter
 					position = position_counter
-					group = bit_group_counter
+					hex_position = hex_position_counter
 					break			
-		
 		#end while
 
 		if(final_bit == range_to_convert):
 			break
 
-		bit_group_counter += 1
+		hex_position_counter += 1
 	#end while	
-		
+
+	bit_counter = 0 
+	list_values = []
+	for hex_group in net:
+		for value in hex_group:
+			index = 0
+
+			while(index < 4):
+				if(bit_counter == initial_bit):
+					initial_hex_group = len(hex_group)
+				elif(bit_counter == final_bit):
+					final_hex_group = len(hex_group)
+				
+				if(bit_counter > initial_bit and bit_counter <= final_bit):
+					print(initial_bit)
+					print(index)
+					list_values.append(index)
+					print(list_values)
+
+				bit_counter += 1
+				index+=1
 
 	print('The value to be changed are from the bit {} until bit {}\n'.format(initial_bit, final_bit))
-	#print('This belongs to the group  and the group {} in the position {}'.format(group, position))
+	print('This value are between hexadecimal group {} and  {}'.format(initial_hex_group, final_hex_group))
+	print('The values to be change are {}'.format(list_values))
 
 # 2001:0DB8::140B/33
 # 2001:0DB8:0000:0000:130F:0000:0000:140B/33 -> /32
