@@ -15,7 +15,7 @@ if __name__ == '__main__':
 	else:
 		ipv6_to_convert = divider_result
 	
-	Calculator(Bin_converter(IPv6_validation(ipv6_to_convert)), range_of_subnets)
+	Calculator(Bin_converter(IPv6_validation(ipv6_to_convert)), int(range_of_subnets))
 
 
 	#ipv6_to_convert = IPv6_validation(ipv6_to_convert)

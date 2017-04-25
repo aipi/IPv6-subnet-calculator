@@ -1,32 +1,65 @@
-def Calculator(net, range):
+def Calculator(net, initial_range):
 	range_to_convert = 0
 	while(1 >= range_to_convert or range_to_convert >= 128 ):
 		try:
 			range_to_convert = int(input('Type it the net range which you want to convert: '))
 		except ValueError:
 			print('Please, enter a valid net range, between 1 and 128.')
-	
-	i, bit_total, group, bit_group, bit = 1, 0, 0, 0, 0
-	while(i <= 32):
-		j = 0
-		while(j < 4):
-			if(bit != range_to_convert):
-				j += 1
-				bit += 1
-			else:
-				bit_total = bit 
-				bit_group = j
-				group = i
-				break
-		if(bit_total == range_to_convert):
-			break
-		i += 1
 
-	print('The calue to be changed is int the bit {}, in the group {} and in the position {}'.format(bit_total + 1, group, bit_group))
+	#This counter is one because make more sense start from one, since IP number start from there 
+	bit_counter, final_bit, initial_bit, group, position, bit_group_counter = 0, 0, 0, 0, 0, 0
+
+	
+	while(bit_group_counter <= 32):	
+		position_counter = 0
+		
+		while(position_counter < 4):
+			if(initial_range < range_to_convert): # > range_to_convert
+				if(bit_counter < range_to_convert):
+					position_counter += 1
+					bit_counter += 1
+							
+					if(bit_counter == initial_range):
+						initial_bit = bit_counter + 1
+				
+				else:
+					final_bit = bit_counter
+					position = position_counter
+					group = bit_group_counter
+					break
+
+			else:
+				if(bit_counter < initial_range): # < initial_range 
+					position_counter += 1
+					bit_counter += 1
+
+					if(bit_counter == range_to_convert):
+						initial_bit = bit_counter + 1
+				else:
+					final_bit = bit_counter
+					position = position_counter
+					group = bit_group_counter
+					break
+		
+		#end while
+
+		if(initial_range < range_to_convert):
+			if(final_bit == range_to_convert):
+				break
+		else:
+			if(final_bit == initial_range):
+				break
+
+		bit_group_counter += 1
+	#end while	
+		
+
+	print('The value to be changed are from the bit {} until bit {}\n'.format(initial_bit, final_bit))
+	#print('This belongs to the group  and the group {} in the position {}'.format(group, position))
 
 # 2001:0DB8::140B/33
 # 2001:0DB8:0000:0000:130F:0000:0000:140B/33 -> /32
-#    REDE <-|-> HOST
+#    REDE <-|-> HOST	
 #           |
 #	        33 34 35 36
 #		    -----------
