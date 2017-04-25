@@ -39,7 +39,7 @@ def Calculator(net, initial_range):
 		hex_position_counter += 1
 	#end while	
 
-	bit_counter = 1 
+	bit_counter, hex_group_counter = 1, 0 
 	list_values = []
 	for hex_group in net:
 		for value in hex_group:
@@ -47,19 +47,22 @@ def Calculator(net, initial_range):
 
 			while(index < 4):
 				if(bit_counter == initial_bit):
-					initial_hex_group = len(hex_group)
-				elif(bit_counter == final_bit):
-					final_hex_group = len(hex_group)
+					initial_hex_group = hex_group_counter
+				
+				if(bit_counter == final_bit):
+					print(bit_counter)
+					final_hex_group = hex_group_counter
 				
 				if(bit_counter >= initial_bit and bit_counter <= final_bit):
-					print(bit_counter)
-					print(hex_group)
-					print(index)
+					#print(bit_counter)
+					#print(hex_group)
+					#print(index)
 					list_values.append(index)
-					print(list_values)
+					#print(list_values)
 
 				bit_counter += 1
 				index+=1
+		hex_group_counter += 1
 
 	print('The value to be changed are from the bit {} until bit {}\n'.format(initial_bit, final_bit))
 	print('This value are between hexadecimal group {} and  {}'.format(initial_hex_group, final_hex_group))
