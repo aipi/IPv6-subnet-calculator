@@ -9,12 +9,16 @@ def Calculator(net, initial_range):
 	#This counter is one because make more sense start from one, since IP number start from there 
 	bit_counter, final_bit, initial_bit, group, position, bit_group_counter = 0, 0, 0, 0, 0, 0
 
+	#converter end to begin
+	if(initial_range > range_to_convert):
+		aux = range_to_convert
+		range_to_convert = initial_range
+		initial_range = aux
 	
 	while(bit_group_counter <= 32):	
 		position_counter = 0
 		
 		while(position_counter < 4):
-			if(initial_range < range_to_convert): # > range_to_convert
 				if(bit_counter < range_to_convert):
 					position_counter += 1
 					bit_counter += 1
@@ -26,29 +30,12 @@ def Calculator(net, initial_range):
 					final_bit = bit_counter
 					position = position_counter
 					group = bit_group_counter
-					break
-
-			else:
-				if(bit_counter < initial_range): # < initial_range 
-					position_counter += 1
-					bit_counter += 1
-
-					if(bit_counter == range_to_convert):
-						initial_bit = bit_counter + 1
-				else:
-					final_bit = bit_counter
-					position = position_counter
-					group = bit_group_counter
-					break
+					break			
 		
 		#end while
 
-		if(initial_range < range_to_convert):
-			if(final_bit == range_to_convert):
-				break
-		else:
-			if(final_bit == initial_range):
-				break
+		if(final_bit == range_to_convert):
+			break
 
 		bit_group_counter += 1
 	#end while	
