@@ -2,13 +2,15 @@ from itertools import permutations
 
 def Treatment_to_permutation(hex_position_group, group_to_change, net):
 	for values in group_to_change:
-		hexadecimal = [0,0,0,0]
+		hexadecimal = [8,4,2,1]
 		index = 0
-		#while(index < len(group_to_change))
-			
-		#hexadecimal.permutations(range)
-		
-		print(len(group_to_change[values]))
+		#while(index < len(group_to_change[values])):
+		#lenght = len(group_to_change[values])
+		#while(index < lenght):
+		#	for i in hex_position_group:
+		#	index += 1
+
+		#print(group_to_change[values])
 
 # 2001:0DB8::140B/34
 
