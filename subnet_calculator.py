@@ -1,16 +1,16 @@
-from itertools import permutations
+from itertools import product
 
 def Treatment_to_permutation(hex_position_group, group_to_change, net):
-	for values in group_to_change:
-		hexadecimal = [8,4,2,1]
+	amount_to_change = 0 
+	for i in group_to_change:
 		index = 0
-		#while(index < len(group_to_change[values])):
-		#lenght = len(group_to_change[values])
-		#while(index < lenght):
-		#	for i in hex_position_group:
-		#	index += 1
+		while(index < len(group_to_change[i])):
+			amount_to_change += 1
+			index += 1
+	print(amount_to_change)
 
-		#print(group_to_change[values])
+	print(list(product(range(2), repeat=amount_to_change)))
+
 
 # 2001:0DB8::140B/34
 
