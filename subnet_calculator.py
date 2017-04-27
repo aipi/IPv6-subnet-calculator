@@ -1,5 +1,18 @@
 from permutation import Permutation
 
+def Teste(permutation, group_to_change):
+	for value in group_to_change:
+		group_lenght = len(group_to_change[value])
+		
+		subset1 = []
+		for values in permutation:
+			subset1.append(list(values))
+			
+			print(subset1)
+
+			
+
+# 2001:0DB8::140B/34
 def Calculator(net, initial_range):
 	range_to_convert = 0
 	while(1 >= range_to_convert or range_to_convert >= 128 ):
@@ -89,22 +102,18 @@ def Calculator(net, initial_range):
 	hex_position_group.append(hex_position_initial)
 	hex_position_group.append(hex_position_final)	
 	
-	permutation = Permutation(group_to_change)
+	permutation = list(Permutation(group_to_change))
+	teste = Teste(list(permutation), group_to_change)
+
 	i = 0
 	bit_counter = 1
 
+	result = []
 	for group in net:
 		j = 0
 
 		while(j < 4):
-			if(bit_counter >= hex_position_initial and bit_counter <= hex_position_final):
-				
-				k = 0
-				bit_formated = []
-				while(k < 4):
-					bit_formated = bit_formated.insert()
-
-				print(net[i][j])
+			#if(bit_counter >= hex_position_initial and bit_counter <= hex_position_final):
 
 			j += 1	
 			bit_counter += 1
