@@ -1,18 +1,4 @@
-from itertools import product
-
-def Treatment_to_permutation(hex_position_group, group_to_change, net):
-	amount_to_change = 0 
-	for i in group_to_change:
-		index = 0
-		while(index < len(group_to_change[i])):
-			amount_to_change += 1
-			index += 1
-	print(amount_to_change)
-
-	print(list(product(range(2), repeat=amount_to_change)))
-
-
-# 2001:0DB8::140B/34
+from permutation import Permutation
 
 def Calculator(net, initial_range):
 	range_to_convert = 0
@@ -93,7 +79,7 @@ def Calculator(net, initial_range):
 	print('The value to be changed are from the bit {} until bit {}'.format(initial_bit, final_bit))
 	print('This value are between hexadecimal group {} and  {}'.format(initial_hex_group, final_hex_group))
 	print('The position is between {} and {}'.format(hex_position_initial, hex_position_final))
-	#print(group_to_change)
+	print(group_to_change)
 
 	i = 0
 	values_list = "".join(str(position) for position in values_list)
@@ -102,33 +88,28 @@ def Calculator(net, initial_range):
 	hex_position_group = []
 	hex_position_group.append(hex_position_initial)
 	hex_position_group.append(hex_position_final)	
-	Treatment_to_permutation(hex_position_group, group_to_change, net)
 	
-	'''while(i < 8):
-		print(net[i])
+	permutation = Permutation(group_to_change)
+	i = 0
+	bit_counter = 1
+
+	for group in net:
 		j = 0
-		
+
 		while(j < 4):
-			if(hex_position_counter >= hex_position_initial):
-				hex_position_group = []
-				hex_position_group.append(hex_position_initial)
-				hex_position_group.append(hex_position_final)			
-			j += 1
-			hex_position_counter += 1
-		#end while
+			if(bit_counter >= hex_position_initial and bit_counter <= hex_position_final):
+				
+				k = 0
+				bit_formated = []
+				while(k < 4):
+					bit_formated = bit_formated.insert()
+
+				print(net[i][j])
+
+			j += 1	
+			bit_counter += 1
 
 		i += 1
-	#end while	
-'''
-
-'''
-if(bit_counter >= initial_bit and bit_counter <= final_bit):
-	if(group_to_change.__contains__(hex_position_counter)):
-		group_to_change[hex_position_counter].append(index)
-		print(group_to_change[hex_position_counter].append(index))
-	else:
-		group_to_change[hex_position_counter] = []
-'''					
 
 # 2001:0DB8::140B/34
 # 2001:0DB8:0000:0000:130F:0000:0000:140B/33 -> /32
