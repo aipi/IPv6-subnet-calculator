@@ -100,20 +100,28 @@ class IPv6:
 
 	def calculation(self):
 		result = []
+		final_result = []
 		for i in self.permutation:
 			index = 0
-			counter = self.initial_bit
+			counter = self.initial_bit+1
 			list_ip_binary = list(self.ip_binary)
-			for j in list_ip_binary[self.initial_bit:self.final_bit]:
+			for j in list_ip_binary[self.initial_bit+1:self.final_bit+1]:
 				aux = i[index]
-				aux = str(aux)
-				list_ip_binary[counter] = aux
+				teste = str(aux)
+				list_ip_binary[counter] = teste
 				index += 1 
 				counter += 1
-			result.append(self.ip_binary)
-		print(result)
+			result.append(list_ip_binary)
+		
+		for group in result:
+			aux = ''
+			for i in group:
+				aux += ''.join(str(x) for x in i)
+			final_result.append(aux)
 
-# 2001:0DB8::140B/34
+		print(final_result)
+
+# 2001:0DB8:D000:000B::/34
 # 2001:0DB8:0000:0000:130F:0000:0000:140B/33 -> /32
 #    REDE <-|-> HOST	
 #           |
