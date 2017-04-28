@@ -1,4 +1,5 @@
 from itertools import product
+import binascii
 
 class IPv6:
 	def __init__ (self, ipv6_to_convert):
@@ -10,10 +11,11 @@ class IPv6:
 		self.ip_binary = self.convert_binary()
 		self.final_bit = self.range_to_convert()
 		self.permutation = self.permutation()
-		self.result = self.calculation()
+		self.ipv6_converted = self.calculation()
+		self.result = self.convert_hexadecimal()
 
 	def print_data(self):
-		print(len(self.ip_binary))
+		print('penis')
 
 	def divide_ip(self):	
 		result = []
@@ -112,6 +114,15 @@ class IPv6:
 				index += 1 
 				counter += 1
 			result.append(list_ip_binary)
+			print(len(result))
+		
+		index = 0 
+		while(index < len(result)):
+			counter = self.final_bit+1
+			while(counter < 127 - (self.final_bit+1)):
+				result[index][counter] = '0'
+				counter += 1
+			index += 1
 		
 		for group in result:
 			aux = ''
@@ -119,8 +130,43 @@ class IPv6:
 				aux += ''.join(str(x) for x in i)
 			final_result.append(aux)
 
-		print(final_result)
+		return final_result
 
+	def convert_hexadecimal(self):
+		result = []
+		counter = 0
+		for i in self.ipv6_converted:
+			result.append(list(i))
+
+		print(result[7])
+
+		final_result = []
+		aux_result = []
+		j = 0
+		while(j < len(result)):
+			counter = 0
+			aux = ''
+			while(counter < 128):
+				if(counter % 4 == 0 and counter != 0):
+					aux_result.append(aux)
+					aux = ''
+				aux +=  result[j][counter]
+				
+				counter += 1
+			final_result.append(aux_result)
+			j += 1
+			#print(final_result)
+		#print(final_result)
+		final = []
+		'''for group in final_result:
+			aux=''
+			for j in group:
+				j = str(j)
+				aux += str(int(j), 16))
+			final.append(aux)
+
+		print(final)
+'''
 # 2001:0DB8:D000:000B::/34
 # 2001:0DB8:0000:0000:130F:0000:0000:140B/33 -> /32
 #    REDE <-|-> HOST	
