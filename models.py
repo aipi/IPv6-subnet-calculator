@@ -1,14 +1,19 @@
+from itertools import product
+
 class IPv6:
 	def __init__ (self, ipv6_to_convert):
 		self.ipv6_to_convert = ipv6_to_convert
 		self.divide_ip = self.divide_ip()
-		self.subnet_to_divide = self.capture_subnet()
+		self.initial_bit = self.capture_subnet()
 		self.ip_to_divide_not_validated = self.capture_ip()
 		self.ip_to_divide_validated = self.validate_ip()
 		self.ip_binary = self.convert_binary()
+		self.final_bit = self.range_to_convert()
+		self.permutation = self.permutation()
+		self.result = self.calculation()
 
 	def print_data(self):
-		print(self.ip_binary)
+		print(len(self.ip_binary))
 
 	def divide_ip(self):	
 		result = []
@@ -22,7 +27,7 @@ class IPv6:
 	
 	def capture_subnet(self):	
 		if(type(self.divide_ip) is list):
-			return self.divide_ip[1]
+			return int(self.divide_ip[1])
 
 	def capture_ip(self):
 		if(type(self.divide_ip) is list):
@@ -55,17 +60,58 @@ class IPv6:
 		return self.ip_to_divide_not_validated
 
 	def convert_binary(self):
-		string = ''
-		for i in self.ip_to_divide_validated:
-			string += i
-		index = 0
-		result = ''
-		while(index < len(string)):
-			result += bin(int(string[index], 16))
-			index += 1
-		return result
-		
+		result = []
+		for byte in self.ip_to_divide_validated:
+			result.append(list(byte))
+		line = 0
+		row = 0
+		while(line < 8):
+			while(row < 4):
+				result[line][row] = bin(int(result[line][row], 16))
+				row += 1
+			row = 0	
+			line += 1
 
+		binary = ''
+		for j in result:
+			for i in j:
+				aux = ''
+				aux = i[2:len(i)+1]
+				index = len(aux)
+				while(index < 4):
+					aux = '0' + aux 
+					index += 1
+				binary += aux
+		return binary
+
+	def range_to_convert(self):
+		range_to_convert = 0
+		while(1 >= range_to_convert or range_to_convert >= 128 ):
+			try:
+				range_to_convert = int(input('Type it the net range which you want to convert: '))
+				return int(range_to_convert)
+			except ValueError:
+				print('Please, enter a valid net range, between 1 and 128.')
+
+	def permutation(self):
+		permutation_range = int(self.final_bit) - self.initial_bit
+		permutation = product(range(2), repeat=permutation_range)
+		return list(permutation)
+
+	def calculation(self):
+		result = []
+		for i in self.permutation:
+			index = 0
+			counter = self.initial_bit
+			list_ip_binary = list(self.ip_binary)
+			for j in list_ip_binary[self.initial_bit:self.final_bit]:
+				aux = i[index]
+				aux = str(aux)
+				list_ip_binary[counter] = aux
+				index += 1 
+				counter += 1
+			result.append(self.ip_binary)
+		print(result)
 
 # 2001:0DB8::140B/34
 # 2001:0DB8:0000:0000:130F:0000:0000:140B/33 -> /32
