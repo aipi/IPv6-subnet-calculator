@@ -39,7 +39,7 @@ class IPv6:
 		if(len(self.ip_to_divide_not_validated) < 39):
 			self.ip_to_divide_not_validated = self.ip_to_divide_not_validated.split(':')
 
-		#abreviação grupo de zero
+		#zero group abbreviation
 		if('' in self.ip_to_divide_not_validated):
 			index = self.ip_to_divide_not_validated.index('')
 			self.ip_to_divide_not_validated = list(filter(None, self.ip_to_divide_not_validated))
@@ -49,7 +49,7 @@ class IPv6:
 				index += 1
 				size += 1 
 			
-		#abreviação de zero
+		#zero abbreviation
 		index = 0
 		for byte in self.ip_to_divide_not_validated:
 			if(len(byte) < 4 and byte != ''):
