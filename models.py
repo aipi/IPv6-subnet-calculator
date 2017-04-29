@@ -20,7 +20,7 @@ class IPv6:
 		print('\nThe subnets of {} in range /{} are: \n'.format(self.ipv6_to_convert, self.final_bit))
 		for i in self.result:
 			print('{}'.format(i))
-		print('\n-------------------------------------\n')
+		print('-------------------------------------\n')
 
 	def divide_ip(self):	
 		result = []
@@ -30,7 +30,6 @@ class IPv6:
 			result.append(self.ipv6_to_convert[self.ipv6_to_convert.index('/')+1:]) 
 		else:
 			result = self.ipv6_to_convert
-		print(result)
 		return result
 	
 	def capture_subnet(self):	
@@ -44,7 +43,7 @@ class IPv6:
 			return self.divide_ip
 
 	def validate_ip(self):
-		if(len(self.ip_to_divide_not_validated) <= 39):
+		if(len(self.ip_to_divide_not_validated) < 39):
 			self.ip_to_divide_not_validated = self.ip_to_divide_not_validated.split(':')
 
 		#zero group abbreviation
@@ -65,7 +64,6 @@ class IPv6:
 					byte = '0' + byte[0:]
 				self.ip_to_divide_not_validated[index] = byte
 			index += 1
-		#print(self.ip_to_divide_not_validated)
 		return self.ip_to_divide_not_validated
 
 	def convert_binary(self):
@@ -125,16 +123,17 @@ class IPv6:
 		final_result = []
 		for i in self.permutation:
 			index = 0
-			counter = self.initial_bit+1
+			counter = self.initial_bit
 			list_ip_binary = list(self.ip_binary)
-			for j in list_ip_binary[self.initial_bit+1:self.final_bit+1]:
+			#print(self.initial_bit-1)
+			for j in list_ip_binary[self.initial_bit:self.final_bit]:
 				aux = i[index]
 				teste = str(aux)
+				print('dick {}'.format(list_ip_binary[counter]))
 				list_ip_binary[counter] = teste
 				index += 1 
 				counter += 1
-			result.append(list_ip_binary)
-		
+			result.append(list_ip_binary)	
 		index = 0 
 		while(index < len(result)):
 			counter = self.final_bit+1
@@ -148,7 +147,7 @@ class IPv6:
 			for i in group:
 				aux += ''.join(str(x) for x in i)
 			final_result.append(aux)
-
+		print(final_result)
 		return final_result
 
 	def convert_hexadecimal(self):
