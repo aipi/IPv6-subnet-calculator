@@ -12,8 +12,8 @@ It will be divided into two parts, IPv6 number and the IPv6 range. After that, i
 
 
      2001:0DB8:D000:0000:0000:0000:0000:140B/34 to /36
-              NET <-|-> HOST
-                    |
+                NET <-|-> HOST
+                      |
             31  33 34 | 35 36 | 37  38
             ----------|-------|-------
              0  0  0  | 0  0  |  0   0
@@ -21,7 +21,7 @@ It will be divided into two parts, IPv6 number and the IPv6 range. After that, i
              1  8  4  | 2  1  |  8   4
 
 
-On the example above, the division o will generate four new subnets range because just the bit ```35``` until bit ```36``` will be changed, this is 2^n bits, where "n" is the number of variations :
+On the example above, the division o will generate four new subnets range because just the bit ```35``` until bit ```36``` will be variated, this is 2^n bits, where "n" is the number of variations :
 
     2001:0DB8:C000:0000:0000:0000:0000:0000
     2001:0DB8:D000:0000:0000:0000:0000:0000
