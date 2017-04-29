@@ -129,7 +129,6 @@ class IPv6:
 			for j in list_ip_binary[self.initial_bit:self.final_bit]:
 				aux = i[index]
 				teste = str(aux)
-				print('dick {}'.format(list_ip_binary[counter]))
 				list_ip_binary[counter] = teste
 				index += 1 
 				counter += 1
@@ -147,7 +146,6 @@ class IPv6:
 			for i in group:
 				aux += ''.join(str(x) for x in i)
 			final_result.append(aux)
-		print(final_result)
 		return final_result
 
 	def convert_hexadecimal(self):
