@@ -8,19 +8,25 @@ First of all, the program will unabbreviated the net address follow the ideas of
 
 Input example: ```2001:DB8::140B/33```. To find out the subnets of the range ```/32.```
 
-It will be divided into two parts, IPv6 number and the IPv6 range. After that, it will be validated and converted to binary matrix which is saparated in groups of 2 bytes to facility the calculator.
+It will be divided into two parts, IPv6 number and the IPv6 range. After that, it will be validated and converted to binary which is separate to execute the calculator logic.
 
 
-    2001:0DB8:0000:0000:130F:0000:0000:140B/33 to /32
-        NET <-|-> HOST
-              |
-            | 33 | 34 35 36
-            |----|---------
-            | 0  | 0  0  0
-            | -  | -  -  -
-            | 8  | 4  2  1
+     2001:0DB8:D000:0000:0000:0000:0000:140B/34 to /36
+              NET <-|-> HOST
+                    |
+            31  33 34 | 35 36 | 37  38
+            ----------|-------|-------
+             0  0  0  | 0  0  |  0   0
+             -  -  -  | -  -  |  -   -
+             1  8  4  | 2  1  |  8   4
 
 
-On the example above, the division o will generate two new subnets range because just the bit ```33``` will be changed:
+On the example above, the division o will generate four new subnets range because just the bit ```35``` until bit ```36``` will be changed, this is 2^n bits, where "n" is the number of variations :
 
-```2001:0DB8:0000:0000:130F:0000:0000:140B/32``` and ```2001:0DB8:8000:0000:130F:0000:0000:140B/33```
+    2001:0DB8:C000:0000:0000:0000:0000:0000
+    2001:0DB8:D000:0000:0000:0000:0000:0000
+    2001:0DB8:E000:0000:0000:0000:0000:0000
+    2001:0DB8:F000:0000:0000:0000:0000:0000
+
+![alt text](https://raw.githubusercontent.com/aipi/IPv6/master/Images/Captura%20de%20Tela%202017-04-29%20%C3%A0s%2001.41.50.png)
+
