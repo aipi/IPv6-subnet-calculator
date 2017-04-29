@@ -28,5 +28,5 @@ On the example above, the division o will generate four new subnets range becaus
     2001:0DB8:E000:0000:0000:0000:0000:0000
     2001:0DB8:F000:0000:0000:0000:0000:0000
 
-![alt text](https://raw.githubusercontent.com/aipi/IPv6/master/Images/example.png)
+![alt text](https://raw.githubusercontent.com/aipi/IPv6-subnet-calculator/master/Images/example.png)
 
