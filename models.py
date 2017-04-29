@@ -5,17 +5,22 @@ class IPv6:
 	def __init__ (self, ipv6_to_convert):
 		self.ipv6_to_convert = ipv6_to_convert
 		self.divide_ip = self.divide_ip()
-		self.initial_bit = self.capture_subnet()
+		self.aux_initial_bit = self.capture_subnet()
 		self.ip_to_divide_not_validated = self.capture_ip()
 		self.ip_to_divide_validated = self.validate_ip()
 		self.ip_binary = self.convert_binary()
-		self.final_bit = self.range_to_convert()
+		self.final_bit = self.get_final_bit()
+		self.initial_bit = self.get_initial_bit()
 		self.permutation = self.permutation()
 		self.ipv6_converted = self.calculation()
 		self.result = self.convert_hexadecimal()
 
 	def print_data(self):
-		print('penis')
+		print('-------------------------------------')
+		print('\nThe subnets of {} in range /{} are: \n'.format(self.ipv6_to_convert, self.final_bit))
+		for i in self.result:
+			print('{}'.format(i))
+		print('\n-------------------------------------\n')
 
 	def divide_ip(self):	
 		result = []
@@ -86,14 +91,27 @@ class IPv6:
 				binary += aux
 		return binary
 
-	def range_to_convert(self):
+	def get_final_bit(self):
 		range_to_convert = 0
 		while(1 >= range_to_convert or range_to_convert >= 128 ):
 			try:
 				range_to_convert = int(input('Type it the net range which you want to convert: '))
+				if(self.aux_initial_bit > range_to_convert):
+					aux = range_to_convert
+					range_to_convert = self.aux_initial_bit
+					self.aux_initial_bit = aux
 				return int(range_to_convert)
 			except ValueError:
 				print('Please, enter a valid net range, between 1 and 128.')
+
+	def get_initial_bit(self):
+		if(self.aux_initial_bit > self.final_bit):
+			aux = self.final_bit
+			self.final_bit = self.aux_initial_bit
+			self.aux_initial_bit = aux
+			return self.aux_initial_bit
+		else: 
+			return self.aux_initial_bit
 
 	def permutation(self):
 		permutation_range = int(self.final_bit) - self.initial_bit
@@ -114,12 +132,11 @@ class IPv6:
 				index += 1 
 				counter += 1
 			result.append(list_ip_binary)
-			print(len(result))
 		
 		index = 0 
 		while(index < len(result)):
 			counter = self.final_bit+1
-			while(counter < 127 - (self.final_bit+1)):
+			while(counter < 128):
 				result[index][counter] = '0'
 				counter += 1
 			index += 1
@@ -133,48 +150,19 @@ class IPv6:
 		return final_result
 
 	def convert_hexadecimal(self):
-		result = []
-		counter = 0
-		for i in self.ipv6_converted:
-			result.append(list(i))
-
-		print(result[7])
-
 		final_result = []
-		aux_result = []
-		j = 0
-		while(j < len(result)):
-			counter = 0
+		for i in self.ipv6_converted:
+			hexadecimal = '%0*X' % (len(i) // 4, int(i, 2))
+			index = 0
+			hex_list = []
 			aux = ''
-			while(counter < 128):
-				if(counter % 4 == 0 and counter != 0):
-					aux_result.append(aux)
+			for j in hexadecimal:
+				aux += j
+				index += 1
+				if(index % 4 == 0 and index != 0):
+					hex_list.append(aux)
 					aux = ''
-				aux +=  result[j][counter]
 				
-				counter += 1
-			final_result.append(aux_result)
-			j += 1
-			#print(final_result)
-		#print(final_result)
-		final = []
-		'''for group in final_result:
-			aux=''
-			for j in group:
-				j = str(j)
-				aux += str(int(j), 16))
-			final.append(aux)
-
-		print(final)
-'''
-# 2001:0DB8:D000:000B::/34
-# 2001:0DB8:0000:0000:130F:0000:0000:140B/33 -> /32
-#    REDE <-|-> HOST	
-#           |
-#	        33 34 35 36
-#		    -----------
-#           0  0  0  0
-#           -  -  -  -
-#		    8  4  2  1
-
-# 2001:0DB8::140B
+			result = ':'.join(hex_list)
+			final_result.append(result)
+		return final_result
