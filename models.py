@@ -30,6 +30,7 @@ class IPv6:
 			result.append(self.ipv6_to_convert[self.ipv6_to_convert.index('/')+1:]) 
 		else:
 			result = self.ipv6_to_convert
+		print(result)
 		return result
 	
 	def capture_subnet(self):	
@@ -43,7 +44,7 @@ class IPv6:
 			return self.divide_ip
 
 	def validate_ip(self):
-		if(len(self.ip_to_divide_not_validated) < 39):
+		if(len(self.ip_to_divide_not_validated) <= 39):
 			self.ip_to_divide_not_validated = self.ip_to_divide_not_validated.split(':')
 
 		#zero group abbreviation
@@ -64,6 +65,7 @@ class IPv6:
 					byte = '0' + byte[0:]
 				self.ip_to_divide_not_validated[index] = byte
 			index += 1
+		#print(self.ip_to_divide_not_validated)
 		return self.ip_to_divide_not_validated
 
 	def convert_binary(self):
