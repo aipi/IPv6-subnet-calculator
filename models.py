@@ -1,3 +1,6 @@
+#Regular expression IPv4: \d{1,3}[.]?\d{3}[.]?\d{1}[.]?\d{1}\\\d{1,2}
+
+
 from itertools import product
 import binascii
 
@@ -16,6 +19,7 @@ class IPv6:
 		self.result = self.convert_hexadecimal()
 
 	def print_data(self):
+		print(self.ip_binary)
 		print('-------------------------------------')
 		print('\nThe subnets of {} in range /{} are: \n'.format(self.ipv6_to_convert, self.final_bit))
 		for i in self.result:
