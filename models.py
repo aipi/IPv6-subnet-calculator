@@ -3,9 +3,10 @@
 from itertools import product
 
 
-class IPv6Calculator:
+class IPv6:
     def __init__(self, ipv6_to_convert):
         self.ipv6_to_convert = ipv6_to_convert
+        self.aux_initial_bit = 0
         self.divide_ip()
         self.capture_subnet()
         self.capture_ip()
